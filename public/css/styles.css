@@ -3,13 +3,13 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #768f9b;
 }
 
 header {
-  background-color: #3498db;
+  background-color: #214057;
   color: white;
-  padding: 1em;
+  padding: 1.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,6 +25,15 @@ header {
 
 .logo {
   font-size: 1.5em;
+}
+
+.logo img {
+  width: 250px; /* İstenen genişlik değeri */
+  height: auto; /* Otomatik yükseklik ayarı, oranları korur */
+}
+
+.header-links {
+  margin-left: 75vh;
 }
 
 .header-links a {
@@ -53,9 +62,9 @@ header {
 }
 
 .chat-header {
-  background-color: #3498db;
+  background-color: #214057;
   color: white;
-  padding: 10px;
+  padding: 20px;
   text-align: center;
   font-size: 1.2em;
 }
@@ -69,7 +78,7 @@ header {
 }
 
 .user-message {
-  background-color: #3498db;
+  background-color: #285367;
   color: white;
   padding: 10px;
   border-radius: 10px;
@@ -80,7 +89,7 @@ header {
 }
 
 .bot-message {
-  background-color: #2ecc71;
+  background-color: #768f9b;
   color: white;
   padding: 10px;
   border-radius: 10px;
@@ -97,7 +106,7 @@ header {
 }
 
 .voice-button {
-  background-color: #2ecc71;
+  background-color: #768f9b;
   color: white;
   padding: 10px;
   border: none;
@@ -113,7 +122,7 @@ header {
 }
 
 .send-button {
-  background-color: #3498db;
+  background-color: #285367;
   color: white;
   padding: 10px;
   border: none;
@@ -131,8 +140,6 @@ header {
   background-color: #93b2c6;
   border-radius: 6px;
 }
-
-
 
 /* Hover durumunda thumb rengi değiştirme */
 .chat-messages::-webkit-scrollbar-thumb:hover {
