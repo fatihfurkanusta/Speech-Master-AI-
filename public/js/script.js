@@ -1,10 +1,23 @@
 var sendButton = document.querySelector('.send-button');
 var messageInput = document.querySelector('.message-input');
 var chatContainer = document.querySelector('.chat-messages');
+const speakButton = document.querySelector(".voice-button");
+
+// Speech recognition operations
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new window.SpeechRecognition();
+
+recognition.interimResults = true;
+recognition.continuous = true;
+recognition.lang = 'en-US';
+
 
 var data ={
     message : ""
 };
+
+
 
 function sendMessage(userMessage){
   try {
@@ -66,32 +79,64 @@ function scrollToBottom() {
 
 sendButton.addEventListener('click', ()=>{
     
-    var userMessage = messageInput.value;
+  var userMessage = messageInput.value;
 
-    if(userMessage == ""){
-        alert("!!! Please enter a valid message !!!");
-    }else{
-        data.message = userMessage.trim();
-        messageInput.value="";
-        sendMessage(data.message);
-        showMessage(data.message);
-        scrollToBottom();
-    }
+  if(userMessage == ""){
+      alert("!!! Please enter a valid message !!!");
+  }else{
+      data.message = userMessage.trim();
+      messageInput.value="";
+      sendMessage(data.message);
+      showMessage(data.message);
+      scrollToBottom();
+  }
 
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const messageInput = document.querySelector(".message-input");
-    const sendButton = document.querySelector(".send-button");
-  
-    messageInput.addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        sendButton.click();
-      }
-    });
-  });
+  const messageInput = document.querySelector(".message-input");
+  const sendButton = document.querySelector(".send-button");
 
+  messageInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      sendButton.click();
+    }
+  });
+});
+
+function speechToText(){
+  recognition.start();
+  
+  let transcript = '';
+  
+  recognition.addEventListener('result', (e) =>{
+
+      transcript = Array.from(e.results)
+          .map(result => result[0])
+          .map(result => result.transcript)
+          .join('');
+
+      messageInput.value = transcript;
+
+      console.log(e);
+  });
+}
+
+let clickCount = 0;
+
+speakButton.addEventListener("click", () => {
+  clickCount++;
+  if (clickCount % 2 === 1) {
+    speakButton.innerHTML = "<i class='fa-solid fa-microphone-slash' style='font-size:20px'></i>";
+    sendButton.disabled = true; 
+    speechToText();
+  } else {
+    speakButton.innerHTML = "<i class='fa-solid fa-microphone' style='font-size: 20px;'></i>";
+    sendButton.disabled = false;
+    recognition.stop();
+  }
+});
 
 module.exports = data;
 

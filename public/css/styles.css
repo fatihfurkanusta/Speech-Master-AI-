@@ -28,13 +28,13 @@ header {
 }
 
 .logo img {
-  width: 250px; /* İstenen genişlik değeri */
+  width: 150px; /* İstenen genişlik değeri */
   height: auto; /* Otomatik yükseklik ayarı, oranları korur */
 }
 
-.header-links {
+/* .header-links {
   margin-left: 75vh;
-}
+} */
 
 .header-links a {
   color: white;
